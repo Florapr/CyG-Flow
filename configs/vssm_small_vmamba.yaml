@@ -1,0 +1,20 @@
+# CyG-Flow: VMamba vssm_small + normalizing flow
+# Entry: main_vmamba.py
+# Weights (download, not in repo): vim_small_midclstok/vssm_small_0229_ckpt_epoch_222.pth
+#   https://github.com/MzeroMiko/VMamba/releases/download/%23v2cls/vssm_small_0229_ckpt_epoch_222.pth
+input_size: 256
+backbone_name: vssm_small
+flow_step: 8
+hidden_ratio: 1.0
+conv3x3_only: false
+
+multi_scale:
+  fusion_learnable: false
+  fusion_weights: [0.2, 0.3, 0.5]
+
+eval:
+  image_score:
+    mode: max
+    use_raw_map: false
+  anomaly_post:
+    map_norm: none
