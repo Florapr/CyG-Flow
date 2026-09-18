@@ -2,27 +2,35 @@
 
 ![](figures/cyg-flow.png)
 
-**CyG-Flow: Cyclic Receptive Field Normalizing Flow for Industrial Anomaly Detection**
+**CyG-Flow: Sequential Multi-Scale Spatial Modeling with Normalizing Flows for Industrial Visual Inspection**
 
-[Paper]() | [Code](https://github.com/Florapr/CyG-Flow)
+> **Double-blind review.** This repository is released anonymously for peer review. Author names, affiliations, and personal links are omitted. Please do not attempt to deanonymize the authors.
+
+Paper: *submitted to EUROGRAPHICS 2027* (anonymous)
 
 ## Introduction
 
-PyTorch training and evaluation code for **CyG-Flow** on industrial anomaly detection benchmarks (**MVTec AD**, **BTAD**, and **VisA**), with a frozen **Vision Mamba** encoder (`vssm_small`).
+PyTorch training and evaluation code for **CyG-Flow** on industrial visual inspection / anomaly detection benchmarks (**MVTec AD**, **BTAD**, and **VisA**), with a frozen **Vision Mamba** encoder (`vssm_small`).
 
 CyG-Flow models normal feature distributions with invertible normalizing flows. The method introduces:
 
-- **CRFT** — Cyclic Receptive Field Transformation across consecutive coupling blocks
-- **WMF** — Weighted Multi-scale Fusion of hierarchical anomaly maps
+- **CRFT** — Cyclic Receptive Field Transformation: repeated `1×1 → 3×3 → 5×5` along successive coupling blocks
+- **WMF** — Weighted Multi-scale Fusion of hierarchical anomaly maps (`0.2 / 0.3 / 0.5` on levels 2–4)
 - **ASES** — Adaptive Statistical Energy Scoring for image-level detection
 
-Pipeline overview: frozen backbone → normalizing flow → multi-scale fusion → scoring (see figure above).
+Pipeline overview: frozen backbone → normalizing flow (CRFT) → multi-scale fusion (WMF) → scoring (ASES). See the figure above.
 
-On MVTec AD, CyG-Flow achieves **99.6%** Image-AUROC (paper result).
+### Paper results (mean over seeds 42–44)
+
+| Dataset   | Image-AUROC | Pixel-AUROC |
+|-----------|-------------|-------------|
+| MVTec AD  | 99.6%       | 98.1%       |
+| BTAD      | 96.8%       | 98.2%       |
+| VisA      | 96.2%       | 98.7%       |
 
 ## Get Started
 
-> **Not included in this repo:** after `git clone`, separately clone [VMamba](https://github.com/MzeroMiko/VMamba) into `VMamba/` and download the `vssm_small` checkpoint (steps 3–4). Training and evaluation require both.
+> **Not included in this repo:** after cloning, separately clone [VMamba](https://github.com/MzeroMiko/VMamba) into `VMamba/` and download the `vssm_small` checkpoint (steps 3–4). Training and evaluation require both.
 
 ### Environment
 
@@ -102,11 +110,12 @@ BTAD and VisA follow the same train/test split convention; point `--data` to the
 
 Default hyperparameters match the paper unless overridden by environment variables or config:
 
-- Image size `256`, flow steps `K=8`, batch size `16`
+- Image size `256×256`, flow steps `K=8`, batch size `16`
 - Adam, learning rate `1e-3`, weight decay `1e-3`, `500` epochs
-- Seeds `42`–`44` (results averaged over three runs)
+- Seeds `42`–`44` (mean over three runs; std ≈ 0.001)
 - One model per category, trained on normal samples only
 - No additional anomaly-map post-processing
+- Hardware in the paper: single NVIDIA RTX 3090
 
 ### Reproducibility
 
@@ -165,4 +174,4 @@ Thanks to [VMamba](https://github.com/MzeroMiko/VMamba) and [FrEIA](https://gith
 
 ## License
 
-All code in this repository is under the [MIT license](LICENSE).
+All code in this repository is under the [MIT license](LICENSE) (Copyright 2026 Anonymous).

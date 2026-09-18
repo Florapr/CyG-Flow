@@ -8,9 +8,11 @@ vim_small_midclstok/
 # External dependency (clone separately)
 VMamba/
 
-# Local-only materials (not for public upload)
+# Local-only materials (not for public / double-blind upload)
 _private_backup/
 Yang.pdf
+杨佳琦*.pdf
+cygflow.pdf
 _paper_extract.txt
 _yang_extract.txt
 
