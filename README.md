@@ -6,9 +6,7 @@
 
 [Paper]() *(link forthcoming)* | [Code](https://github.com/Florapr/CyG-Flow)
 
-> Accepted to an **ICDM Workshop**.
-
-**Author:** [florapr](https://github.com/Florapr)
+> This paper has been accepted at the **OWAD Workshop at ICDM 2026**.
 
 ## News
 
@@ -20,8 +18,8 @@ PyTorch training and evaluation code for **CyG-Flow** on industrial anomaly dete
 
 CyG-Flow models normal feature distributions with invertible normalizing flows. The method introduces:
 
-- **CRFT** — Cyclic Receptive Field Transformation across consecutive coupling blocks (kernel schedule \(1\times1 \rightarrow 3\times3 \rightarrow 5\times5\))
-- **WMF** — Weighted Multi-scale Fusion of hierarchical anomaly maps (\(\alpha_2=0.2\), \(\alpha_3=0.3\), \(\alpha_4=0.5\))
+- **CRFT** — Cyclic Receptive Field Transformation across consecutive coupling blocks (kernel schedule 1×1 → 3×3 → 5×5)
+- **WMF** — Weighted Multi-scale Fusion of hierarchical anomaly maps (α₂=0.2, α₃=0.3, α₄=0.5)
 - **ASES** — Adaptive Statistical Energy Scoring for robust image-level detection
 
 Pipeline: frozen backbone → multi-scale normalizing flow (CRFT) → WMF → ASES (see figure above).
